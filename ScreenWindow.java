@@ -29,10 +29,7 @@ public class ScreenWindow extends Frame implements WindowListener, Runnable, Key
 	
 	int xpos;
 	
-	BufferedImage golemSpriteSheet;
-	
-	
-	BufferedImage[] golem = new BufferedImage[32];
+	BufferedImage[] golem;
 	
 	
 	
@@ -45,8 +42,8 @@ public class ScreenWindow extends Frame implements WindowListener, Runnable, Key
 	
 	public ScreenWindow(){
 		super();
-		loadGraphics();
 		
+		golem = SpriteSheet.getAsArray("golem-walk.png", 4, 7, 64, 64);
 		
 		poseControl = 0;
 		spiderSelector = 0;
@@ -240,29 +237,4 @@ public class ScreenWindow extends Frame implements WindowListener, Runnable, Key
 		
 	}
 
-	private void loadGraphics(){
-		
-		
-		try {
-			golemSpriteSheet = ImageIO.read(new File("golem-walk.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			golemSpriteSheet = null;
-			e.printStackTrace();
-		}
-		int rows = 4;
-		int col = 7;
-		int counter = 0;
-		for(int i = 0; i < rows; i++){
-			for(int j = 0; j < col; j++){
-				golem[counter] = new BufferedImage(64,64,golemSpriteSheet.getType());
-				Graphics2D gr = golem[counter].createGraphics();
-				gr.drawImage(golemSpriteSheet, 0, 0, 64,64,64*j,64*i,64*j + 64, 64*i + 64, null);
-				gr.dispose();
-				counter ++;
-			}
-		}
-		
-		
-	}
 }
